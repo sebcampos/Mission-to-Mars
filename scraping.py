@@ -23,7 +23,7 @@ def scrape_all():
         "news_paragraph": news_paragraph,
         "featured_image": featured_image(browser),
         "facts": mars_facts(),
-        "Png urls & titles":scrape_urls_and_titles(browser), 
+        "png_urls_titles":scrape_urls_and_titles(browser), 
         "last_modified": dt.datetime.now()
     }
 
@@ -127,7 +127,7 @@ def scrape_urls_and_titles(browser):
 
     #iterate through divs_list object to collect relevent info ie titles, descriptions, and img links
     titles = [i.find('h3').get_text() for i in divs_list]
-    descriptions = [i.find('p').get_text() for i in divs_list]
+    #descriptions = [i.find('p').get_text() for i in divs_list]
 
     # use a for loops to navigate to each item in the divs_list and scrape the img url by title name using browser.find_by_text()
     for i in titles:
@@ -135,6 +135,9 @@ def scrape_urls_and_titles(browser):
         hot_cauldren = soup(browser.html,"html.parser")
         hemisphere_image_urls.append({'img_url':f"{base_url}{hot_cauldren.find('img', class_='wide-image').get('src')}",'title':i})
         browser.visit(url)
+    
+    #df = pd.DataFrame(hemisphere_image_urls)
+    #return df.to_html(classes="table table-striped")
     
     return hemisphere_image_urls
 
