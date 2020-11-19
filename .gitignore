@@ -3,3 +3,7 @@ test.ipynb
 
 #adding gecko driver log to .gitignore
 geckodriver.log
+
+.ipynb_checkpoints
+
+__pycache__
